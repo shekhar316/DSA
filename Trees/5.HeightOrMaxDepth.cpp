@@ -12,25 +12,19 @@ struct node{
 	}
 };
 
-void inOrderCal(node* root, vector<int>& inorder){
+int height(node* root){
 	if(root == NULL){
-		return;
+		return 0;
+	}else{
+		return (1 + max(height(root -> left), height(root -> right)));
 	}
-	inOrderCal(root -> left, inorder);
-	inorder.push_back(root -> key);
-	inOrderCal(root -> right, inorder);
 }
-
-
 
 int main(){
 	node* root = new node(10);
 	root -> left = new node(20);
 	root -> right = new node(30);
-	vector<int> inorder;
-	inOrderCal(root, inorder);
-	for(auto i: inorder){
-		cout << i << " ";
-	}
-	cout << "\n";
+	root -> left -> left = new node(40);
+	cout << height(root) << "\n";
+	return 0;
 }
